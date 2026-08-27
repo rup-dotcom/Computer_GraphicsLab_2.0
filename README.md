@@ -1,4 +1,4 @@
-# Toll Booth Project (2D Animation using OpenGL / GLUT)
+# Toll Booth Project
 
 This is a simple **2D computer graphics animation project** made using **C++** and the **OpenGL (GLUT/freeglut)** library. It simulates a car approaching a toll booth, the gate opening, and the car passing through it. The project is built and run using **Code::Blocks IDE** on Windows.
 
