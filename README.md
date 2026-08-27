@@ -6,48 +6,89 @@ This is a simple **2D computer graphics animation project** made using **C++** a
 
 ## 1. Installation Guide
 
-Follow these steps carefully to set up and run the project on your computer.
 
-### Step 1: Install Code::Blocks (with MinGW compiler)
-1. Download **Code::Blocks** from the official website: https://www.codeblocks.org/downloads/
-2. Choose the version that says **"codeblocks-xx.xx-mingw-setup.exe"** — this version comes with the GCC/MinGW compiler already bundled, so you don't need to install it separately.
-3. Install it like a normal Windows application (Next → Next → Finish).
+This project needs **Code::Blocks** (with the MinGW compiler) and the **freeglut** library set up correctly before it will run. Follow these steps in order — a ready-made setup folder (`GlutSetup_Codeblocks20_03.zip`) containing both the Code::Blocks installer and the freeglut library is provided along with this project, so you don't need to search for anything online.
 
-### Step 2: Download and Set Up freeglut
-This project uses the **freeglut** library to create the window and handle graphics/animation, so it must be installed separately.
+### Step 1: Download and Extract the Setup Folder
+1. Download the provided **`GlutSetup_Codeblocks20_03.zip`** file.
+2. Extract (unzip) it to any location on your computer. After extracting, you should see:
+   - `codeblocks-20.03mingw-setup.exe` — the Code::Blocks installer.
+   - A `freeglut` folder — containing the `include`, `lib`, and `bin` folders needed for OpenGL/GLUT.
 
-1. Download the **freeglut** library (MinGW version) from: https://www.transmissionzero.co.uk/software/freeglut-devel/
-2. Extract the downloaded folder and rename/place it as `freeglut` (for example: `C:/Users/<YourName>/freeglut`).
-3. Inside the `freeglut` folder, you should see three important folders: `include`, `lib`, and `bin`.
-4. Copy the file `freeglut.dll` from the `bin` folder into:
-   - `C:\Windows\System32` (for 64-bit systems), **and/or**
-   - The same folder where your project's `.exe` file will be generated (`bin/Debug` folder of this project).
+### Step 2: Install Code::Blocks
+1. Run **`codeblocks-20.03mingw-setup.exe`** from the extracted folder.
+2. Install it normally (Next → Next → Finish). This version comes with the **MinGW compiler** bundled in, so no separate compiler installation is needed.
 
-> **Note:** This project's `.cbp` file currently points to a fixed path (`C:/Users/Jannat/freeglut`). If your freeglut folder is in a different location, you must update this path — see **Step 4** below.
+### Step 3: Copy the GLUT Header Files
+1. Go to the extracted **`freeglut\include\GL`** folder. You should see 4 files here (`glut.h`, `freeglut.h`, `freeglut_ext.h`, `freeglut_std.h`).
+2. Copy all 4 files.
+3. Paste them into:
+   ```
+   C:\Program Files\CodeBlocks\MinGW\x86_64-w64-mingw32\include\GL
+   ```
+   (You may need to click **"Continue"** if Windows asks for Administrator permission.)
 
-### Step 3: Open the Project
-1. Extract the `Toll_booth.zip` file to any folder on your computer.
-2. Open **Code::Blocks**.
-3. Go to **File → Open**, then select the file named **`Toll booth.cbp`** inside the extracted folder.
+### Step 4: Copy the GLUT Library Files
+1. Go to **`freeglut\lib`** and copy the files there (`libfreeglut.a` and `libfreeglut_static.a`).
+2. Paste them into:
+   ```
+   C:\Program Files\CodeBlocks\MinGW\x86_64-w64-mingw32\lib
+   ```
+3. Now go into **`freeglut\lib\x64`** and copy the 2 files there (the 64-bit versions of `libfreeglut.a` and `libfreeglut_static.a`).
+4. Paste them into the **same** folder as above:
+   ```
+   C:\Program Files\CodeBlocks\MinGW\x86_64-w64-mingw32\lib
+   ```
+   (If Windows asks whether to replace/keep both files, choose **"Replace the files in the destination"** — since the 64-bit versions should overwrite the earlier ones so the compiler picks up the correct architecture.)
 
-### Step 4: Configure Compiler & Linker Paths (Important!)
-Since the project was originally created on another computer, you need to point it to your own freeglut folder:
+### Step 5: Copy the freeglut DLL
+1. Go to **`freeglut\bin\x64`** and copy the **`freeglut.dll`** file.
+2. Paste it into:
+   ```
+   C:\Windows
+   ```
+   (This lets any program on your PC find `freeglut.dll` at runtime, so your compiled `.exe` won't complain about a missing DLL.)
 
-1. Go to **Project → Build Options**.
-2. Under the **Search Directories** tab:
-   - **Compiler** tab → add the path to your `freeglut/include` folder.
-   - **Linker** tab → add the path to your `freeglut/lib` folder.
-3. Under the **Linker Settings** tab, make sure these libraries are listed under "Link libraries":
-   - `freeglut`
-   - `opengl32`
-   - `glu32`
-   - `winmm`
-   - `gdi32`
+### Step 6: Update the Code::Blocks "GLUT" Project Template
+This step tells Code::Blocks to link against **freeglut** instead of the older `glut32` library whenever you create a new GLUT project from its built-in wizard.
 
-### Step 5: Build and Run
-1. Click the **Build** button (gear icon) or press `Ctrl + F9` to compile the code.
-2. Click the **Run** button (green play icon) or press `Ctrl + F10` to run the program.
-3. If everything is set up correctly, a window titled **"Toll Booth Project (2D)"** will open showing the animation.
+1. Open **Notepad++** (install it first if you don't have it — it's free).
+2. Open this file in Notepad++:
+   ```
+   C:\Program Files\CodeBlocks\share\codeblocks\templates\glut.cbp
+   ```
+3. Press **Ctrl+H** to open **Search → Replace**.
+   - **Find what:** `glut32`
+   - **Replace with:** `freeglut`
+4. Click **Replace All**, then **Save** (Ctrl+S). If Notepad++ asks to save in **Administrator mode**, click **"Yes"**.
+
+### Step 7: Update the GLUT Wizard Script
+Repeat the same find-and-replace on the wizard script file so the project creation wizard also uses freeglut:
+
+1. In Notepad++, open:
+   ```
+   C:\Program Files\CodeBlocks\share\codeblocks\templates\wizard\glut\wizard.script
+   ```
+2. Press **Ctrl+H**, and do the same replace as Step 6:
+   - **Find what:** `glut32`
+   - **Replace with:** `freeglut`
+3. **Replace All → Save**, and click **"Yes"** if asked for Administrator mode.
+
+### Step 8: Verify the Compiler Path in Code::Blocks
+1. Open the **Code::Blocks** application.
+2. Go to **Settings → Compiler → Toolchain executables** tab.
+3. Check that the **"Compiler's installation directory"** field is correctly set to:
+   ```
+   C:\Program Files\CodeBlocks\MinGW
+   ```
+4. Click **OK**.
+
+### Step 9: Open This Project and Run It
+1. Extract the `Toll_booth.zip` project file to any folder.
+2. In Code::Blocks, go to **File → Open**, then select **`Toll booth.cbp`**.
+3. Click the **Build** button (gear icon) or press `Ctrl + F9` to compile.
+4. Click the **Run** button (green play icon) or press `Ctrl + F10` to run.
+5. If everything was set up correctly, a window titled **"Toll Booth Project (2D)"** will open showing the animation.
 
 ---
 
