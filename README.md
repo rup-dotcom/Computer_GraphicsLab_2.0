@@ -10,7 +10,7 @@ This is a simple **2D computer graphics animation project** made using **C++** a
 This project needs **Code::Blocks** (with the MinGW compiler) and the **freeglut** library set up correctly before it will run. Follow these steps in order — a ready-made setup folder (`GlutSetup_Codeblocks20_03.zip`) containing both the Code::Blocks installer and the freeglut library is provided along with this project, so you don't need to search for anything online.
 
 ### Step 1: Download and Extract the Setup Folder
-1. Download the provided **`GlutSetup_Codeblocks20_03.zip`** file.
+1. [Download GlutSetup_Codeblocks20_03.zip](https://github.com/rup-dotcom/Computer_GraphicsLab_2.0/releases/latest)
 2. Extract (unzip) it to any location on your computer. After extracting, you should see:
    - `codeblocks-20.03mingw-setup.exe` — the Code::Blocks installer.
    - A `freeglut` folder — containing the `include`, `lib`, and `bin` folders needed for OpenGL/GLUT.
