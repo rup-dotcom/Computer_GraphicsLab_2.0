@@ -54,7 +54,10 @@ Since the project was originally created on another computer, you need to point 
 ## 2. What I Did in This Project (Explanation with Screenshot)
 
 The screenshot below shows the output of the program when it is run:
-<img width="1001" height="626" alt="image" src="https://github.com/user-attachments/assets/19b004fb-f2f1-49bf-a0ba-abae8d724d0a" />
+<img width="998" height="623" alt="image" src="https://github.com/user-attachments/assets/cd3a3cb5-d86d-4b16-8c79-b88c237c9db2" />
+<img width="1001" height="622" alt="image" src="https://github.com/user-attachments/assets/4c2ff0a0-49ec-4714-ab32-eb727e82d7c1" />
+
+
 
 
 - **Sky background**: A blue gradient rectangle is drawn at the top of the screen to represent the sky.
